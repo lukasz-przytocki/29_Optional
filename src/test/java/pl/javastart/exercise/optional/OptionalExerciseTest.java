@@ -12,29 +12,25 @@ public class OptionalExerciseTest {
 
     private OptionalExercise optionalExercise;
 
-    @Before
-    public void init() {
+    @Before public void init() {
         optionalExercise = new OptionalExercise();
     }
 
-    @Test
-    public void shouldCreateEmptyOptional() {
+    @Test public void shouldCreateEmptyOptional() {
         Optional optional = optionalExercise.createEmptyOptional();
 
         // then
         assertThat(optional.isPresent(), is(false));
     }
 
-    @Test
-    public void shouldOptionalWithValue() {
+    @Test public void shouldOptionalWithValue() {
         Optional optional = optionalExercise.createOptionalWithValue();
 
         // then
         assertThat(optional.isPresent(), is(true));
     }
 
-    @Test
-    public void shouldOptionalWithGivenValue() {
+    @Test public void shouldOptionalWithGivenValue() {
         Optional<String> optional = optionalExercise.createOptionalWithValue("Test value");
 
         // then
@@ -42,22 +38,26 @@ public class OptionalExerciseTest {
         assertThat(optional.get(), is("Test value"));
     }
 
-    @Test
-    public void shouldOptionalWithGivenValueAndDefaultValue() {
-        Optional<String> optional = optionalExercise.createOptionalWithValueAndDefault("Test value", "Default value");
+    @Test public void shouldOptionalWithGivenValueAndDefaultValue() {
+        // given
+        Optional<String> optional = Optional.of("Test value");
+
+        // when
+        String result = optionalExercise.getOptionalValueOrDefault(optional, "Default value");
 
         // then
-        assertThat(optional.isPresent(), is(true));
-        assertThat(optional.get(), is("Test value"));
+        assertThat(result, is("Test value"));
     }
 
-    @Test
-    public void shouldOptionalWithGivenValueAndDefaultValue2() {
-        Optional<String> optional = optionalExercise.createOptionalWithValueAndDefault(null, "Default value");
+    @Test public void shouldOptionalWithGivenValueAndDefaultValue2() {
+        // given
+        Optional<String> optional = Optional.empty();
+
+        // when
+        String result = optionalExercise.getOptionalValueOrDefault(optional, "Default value");
 
         // then
-        assertThat(optional.isPresent(), is(true));
-        assertThat(optional.get(), is("Default value"));
+        assertThat(result, is("Default value"));
     }
 
 }

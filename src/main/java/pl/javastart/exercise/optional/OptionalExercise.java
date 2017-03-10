@@ -16,7 +16,7 @@ public class OptionalExercise {
         return null;
     }
 
-    public Optional<String> createOptionalWithValueAndDefault(String givenValue, String defaultValue) {
+    public String getOptionalValueOrDefault(Optional<String> optional, String defaultValue) {
         return null;
     }
 }
